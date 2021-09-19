@@ -1,4 +1,4 @@
-package com.prsolutions.freshveggies.api.service;
+package com.prsolutions.freshveggiesshops.api.service;
 
 import java.util.List;
 
@@ -32,5 +32,13 @@ public class ShoppingService {
 	 */
 	public Shop addShop(Shop shop) {
 		return shoppingRepository.save(shop);
-	}	
+	}
+	
+	public Shop getShop(long shopId) {
+		return shoppingRepository.findById(shopId).get();
+	}
+	
+	public long getAllRecordCount() {
+		return shoppingRepository.count();
+	}
 }

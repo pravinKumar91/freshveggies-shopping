@@ -5,27 +5,35 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prsolutions.freshveggies.api.service.ShoppingService;
 import com.prsolutions.freshveggiesshops.api.model.Shop;
+import com.prsolutions.freshveggiesshops.api.service.ShoppingService;
 
 @RestController
 @RequestMapping("/shop")
 public class ShoppingController {
-	
+		
 	@Autowired
 	public ShoppingService shoppingService;	
 
-	@RequestMapping("/{veggiId}")
-	public Shop getShop(@PathVariable("veggiId") int veggiId) {
-		return new Shop(1,"Kamal Mart, Jambe", "8700000000",411046);
+	@RequestMapping("/{shopId}")
+	public Shop getShop(@PathVariable("shopId") long shopId) {
+		return shoppingService.getShop(shopId);
 	}
 	
-	@RequestMapping("/{pincode}")
+	@RequestMapping("/location/{pincode}")
 	public List<Shop> getShopsByPinCode(@PathVariable("pincode") int pincode) {
 		List<Shop> listShops = shoppingService.getAllShops();
 		return listShops.stream().filter(shop ->shop.getShopPinCode()==pincode).collect(Collectors.toList());
+	}
+	
+	@PostMapping("/addshop")
+	public Shop addShop(@RequestBody Shop shop) {
+		System.out.println("Shop added sucessfully.");
+		return shoppingService.addShop(shop);
 	}
 }

@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.prsolutions.freshveggiesshops.api.dao.ShoppingRepository;
 import com.prsolutions.freshveggiesshops.api.model.Shop;
+import com.prsolutions.freshveggiesshops.api.service.ShoppingService;
 
 
 public class ShoppingServiceTest {
