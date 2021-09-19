@@ -38,6 +38,10 @@ public class ShoppingService {
 		return shoppingRepository.findById(shopId).get();
 	}
 	
+	public List<Shop> getShopByName(String shopName) {
+		return shoppingRepository.findByShopNameContainingIgnoreCase(shopName);
+	}
+	
 	public long getAllRecordCount() {
 		return shoppingRepository.count();
 	}

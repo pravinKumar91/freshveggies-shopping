@@ -20,9 +20,14 @@ public class ShoppingController {
 	@Autowired
 	public ShoppingService shoppingService;	
 
-	@RequestMapping("/{shopId}")
+	@RequestMapping("/id/{shopId}")
 	public Shop getShop(@PathVariable("shopId") long shopId) {
 		return shoppingService.getShop(shopId);
+	}
+	
+	@RequestMapping("/name/{shopName}")
+	public List<Shop> getShop(@PathVariable("shopName") String shopName) {
+		return shoppingService.getShopByName(shopName);
 	}
 	
 	@RequestMapping("/location/{pincode}")
@@ -31,7 +36,7 @@ public class ShoppingController {
 		return listShops.stream().filter(shop ->shop.getShopPinCode()==pincode).collect(Collectors.toList());
 	}
 	
-	@PostMapping("/addshop")
+	@PostMapping("/add/newshop")
 	public Shop addShop(@RequestBody Shop shop) {
 		System.out.println("Shop added sucessfully.");
 		return shoppingService.addShop(shop);
